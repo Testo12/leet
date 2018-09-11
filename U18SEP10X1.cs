@@ -12,34 +12,34 @@ namespace U18SEP10X1
     {
         static void Main(string[] args)
         {
-            
+
             int active = 0;
 
-                do
+            do
+            {
+
+
+                Console.WriteLine("Vilket programm? A,B,C,D,E,F eller Q för att avsluta?");
+                String choice = Console.ReadLine();
+                String Change = choice.ToLower();
+                switch (Change)
                 {
 
 
-                    Console.WriteLine("Vilket programm? A,B,C,D,E,F eller Q för att avsluta?");
-                    String choice = Console.ReadLine();
-                    String Change = choice.ToLower();
-                    switch (Change)
-                    {
-
-
-                        case "a":
+                    case "a":
                         System.Console.WriteLine("Skriv in en mening");
                         System.String quote = Console.ReadLine();
                         System.String wordd = quote;
                         wordd = System.Text.RegularExpressions.Regex.Replace(quote, @"\s+", " ");
-                        int countWords = wordd.Trim().Split().Length; 
+                        int countWords = wordd.Trim().Split().Length;
                         System.Console.WriteLine("Din mening innehåller " + countWords + " ord.");
                         string[] words = quote.Split(' ');
                         foreach (string word in words)
                         { Console.WriteLine(word + " är " + word.Length + " tecken"); }
                         active = 1;
-                            break;
+                        break;
 
-                        case "b":
+                    case "b":
                         System.Console.WriteLine("Skriv en mening");
                         String text = Console.ReadLine();
                         words = text.Split(' ');
@@ -58,71 +58,104 @@ namespace U18SEP10X1
                         }
                         Console.ReadLine();
 
-
-
-
                         active = 1;
-                            break;
+                        break;
 
-                        case "c":
-
-
+                    case "c":
                         System.Console.WriteLine("Skriv en mening");
                         String sentence = Console.ReadLine();
                         string txt = sentence.ToLower();
-                        String[] part = txt.Split(' ');
+                        string[] separatingChars = { "<", ".","," };
+                        String[] part = txt.Split(separatingChars, System.StringSplitOptions.RemoveEmptyEntries);
 
-                        var list = new List<string> (part);
-                        var q = list.GroupBy(x => x)
+                        var list = new List<string>(part);
+                        var q = list.GroupBy(b => b)
                                     .Select(g => new { Value = g.Key, Count = g.Count() })
-                                    .OrderByDescending(x => x.Count);
+                                    .OrderByDescending(b => b.Count);
 
-                        foreach (var x in q)
+                        foreach (var b in q)
                         {
-                            Console.WriteLine("Ord: " + x.Value + " Antal: " + x.Count);
+                            Console.WriteLine("Ord: " + b.Value + " Antal: " + b.Count);
                         }
+                        active = 1;
+                        break;
+
+                    case "d":
+
+                        System.Console.WriteLine("Skriv en mening");
+                        String line = Console.ReadLine();
+                        string parts = line.ToLower();
+                        String[] myStrings = line.Split();
+
+                        string longText = line;
+
+                        var count = CharacterCount.Count(longText);
+
+                        foreach (var character in count)
+                        {
+                            Console.WriteLine("{0} - {1}", character.Key, character.Value);
+
+                        }
+                            active = 1;
+                            break;
+
+
+                        case "e":
 
 
                         active = 1;
-                            break;
+                        break;
 
-                        case "d":
-                            
-                            active = 1;
-                            break;
-
-                        case "e":
-                           
-                            active = 1;
-                            break;
-
-                        case "f":
-
-                           
-
-                            active = 1;
-                            break;
-
-
-                            System.Console.ReadLine();
+                    case "f":
 
 
 
-                        case "q":
-                            Application.Exit();
-                            active = 0;
-                            break;
-                    }
+                        active = 1;
+                        break;
 
+
+                        System.Console.ReadLine();
+
+
+
+                    case "q":
+                        Application.Exit();
+                        active = 0;
+                        break;
                 }
-                while (active != 0);
-
-
-
+            
 
 
             }
+            while (active != 0);
 
+
+
+
+
+        }
+
+        class CharacterCount
+        {
+            public static SortedDictionary<char, ulong> Count(string stringToCount)
+            {
+                SortedDictionary<char, ulong> characterCount = new SortedDictionary<char, ulong>();
+
+                foreach (var character in stringToCount)
+                {
+                    if (!characterCount.ContainsKey(character))
+                    {
+                        characterCount.Add(character, 1);
+                    }
+                    else
+                    {
+                        characterCount[character]++;
+                    }
+                }
+
+                return characterCount;
             }
-    }
+
+        }
+    } }
 

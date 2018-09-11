@@ -102,6 +102,9 @@ namespace U18SEP10X1
 
                         case "e":
 
+                        System.Console.WriteLine("Skriv ett ");
+
+
 
                         active = 1;
                         break;

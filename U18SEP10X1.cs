@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 namespace U18SEP10X1
 {
@@ -64,20 +65,23 @@ namespace U18SEP10X1
                             break;
 
                         case "c":
-                        //
-                        System.String food1 = Console.ReadLine();
-                        System.String longest = food1;
-                        System.Console.WriteLine("Vilken är andra favoriträtt?");
-                        System.String food2 = Console.ReadLine();
-                        if (food2.Length > longest.Length) { longest = food2; }
-                        System.Console.WriteLine("Vilken är tredje favoriträtt?");
-                        System.String food3 = Console.ReadLine();
-                        if (food3.Length > longest.Length) { longest = food3; }
-                        System.Console.WriteLine("Dina favoriträtter är " + food1 + "  " + food2 + "  " + food3);
-                        System.Console.WriteLine(food1 + " består av " + food1.Length + " bokstäver.");
-                        System.Console.WriteLine(food2 + " består av " + food2.Length + " bokstäver.");
-                        System.Console.WriteLine(food3 + " består av " + food3.Length + " bokstäver.");
-                        System.Console.WriteLine("Den maträtten med flest bokstäver är " + longest + " på " + longest.Length + " bokstäver."); //Tredje Delen av koden.  
+
+
+                        System.Console.WriteLine("Skriv en mening");
+                        String sentence = Console.ReadLine();
+                        string txt = sentence.ToLower();
+                        String[] part = txt.Split(' ');
+
+                        var list = new List<string> (part);
+                        var q = list.GroupBy(x => x)
+                                    .Select(g => new { Value = g.Key, Count = g.Count() })
+                                    .OrderByDescending(x => x.Count);
+
+                        foreach (var x in q)
+                        {
+                            Console.WriteLine("Ord: " + x.Value + " Antal: " + x.Count);
+                        }
+
 
                         active = 1;
                             break;

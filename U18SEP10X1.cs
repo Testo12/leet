@@ -19,7 +19,7 @@ namespace U18SEP10X1
             {
 
 
-                Console.WriteLine("Vilket programm? A,B,C,D,E,F eller Q för att avsluta?");
+                Console.WriteLine("Vilket programm? A,B,C,D,E,F,H,I eller Q för att avsluta?");
                 String choice = Console.ReadLine();
                 String Change = choice.ToLower();
                 switch (Change)
@@ -36,6 +36,7 @@ namespace U18SEP10X1
                         string[] words = quote.Split(' ');
                         foreach (string word in words)
                         { Console.WriteLine(word + " är " + word.Length + " tecken"); }
+
                         active = 1;
                         break;
 
@@ -72,10 +73,10 @@ namespace U18SEP10X1
                                     .Select(g => new { Value = g.Key, Count = g.Count() })
                                     .OrderByDescending(b => b.Count);
 
-                        foreach (var b in q)
-                        {
+                        foreach (var b in q){
                             Console.WriteLine("Ord: " + b.Value + " Antal: " + b.Count);
                         }
+
                         active = 1;
                         break;
 
@@ -95,20 +96,12 @@ namespace U18SEP10X1
                             Console.WriteLine("{0} - {1}", character.Key, character.Value);
 
                         }
+
                             active = 1;
                             break;
-
-
+                        
                         case "e":
 
-                        System.Console.WriteLine("Skriv ett ");
-
-
-
-                        active = 1;
-                        break;
-
-                    case "f":
                         int k = 0;
                         do
                         {
@@ -116,17 +109,88 @@ namespace U18SEP10X1
                             String input = Console.ReadLine();
                             String close = ("avsluta");
                             int c = string.Compare(input, close);
-                            System.Console.WriteLine("Du skrev "+ input);
+                            System.Console.WriteLine("Du skrev " + input);
                             if (c == 0) { k = 1; }
 
-                            
-                            
+
+
                         }
                         while (k != 1);
 
                         active = 1;
                         break;
 
+                    case "f":
+
+                        int l = 0;
+                        do
+                        {
+                            System.Console.WriteLine(" Skriv in siffra mellan 1 och 21. ");
+                            int guess = Convert.ToInt32(Console.ReadLine());
+                            Random random = new Random();
+                            int luck = random.Next(1, 21);
+
+                            
+                            if (guess == luck)
+                            {
+                                System.Console.WriteLine("Du gissa rätt! Tillbaka till menyn för ditt pris ");
+                                l = 1;
+                            }
+
+                            else
+                            {
+                                System.Console.WriteLine("Du gissa tyvärr fel, försök igen!"+ " Rätt siffra var "+ luck);
+                                l = 0;
+                            }
+                                ;
+                        }
+                        while (l != 1);
+
+                        active = 1;
+                        break;
+
+                    case "h":
+                    
+                        string[] stringsForEncoding = { "4", "8", "( ", "|)", "3", "|=", "9", "|-|", "1", "!", "|<", "1", "(V)", "(\\)", "0", "|2", "(,)", "|Z", "5", "7", "|_|", "\\/", "`//", "x", "y", "z" };
+                        string[] alphabet = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z" };
+                        Console.Write("Skriv vad vill du översätta till LEET: ");
+                        char[] toLeet = Console.ReadLine().ToCharArray();
+                        int length = toLeet.Length;
+                        string[] encodedCharacters = new string[length];
+                        int leet = 0;
+                        foreach (char normal in toLeet)
+                        {
+                            
+                            if ((normal >= 'a' && normal <= 'z') || (normal >= 'A' && normal <= 'Z'))
+                            {
+                                int results = Array.FindIndex(alphabet, x => x.Contains(normal));
+                                encodedCharacters[leet] = stringsForEncoding[results];
+                            }
+
+                            else
+                            {
+                                encodedCharacters[leet] = normal.ToString();
+                            }
+                            leet++;
+                        }
+                        Console.WriteLine(string.Join("", encodedCharacters));
+                        
+
+
+
+
+
+
+
+
+                        active = 1;
+                        break;
+
+                    case "i":
+
+
+                        active = 1;
+                        break;
 
                         System.Console.ReadLine();
 

@@ -65,8 +65,7 @@ namespace U18SEP10X1
                         System.Console.WriteLine("Skriv en mening");
                         String sentence = Console.ReadLine();
                         string txt = sentence.ToLower();
-                        string[] separatingChars = { "<", ".","," };
-                        String[] part = txt.Split(separatingChars, System.StringSplitOptions.RemoveEmptyEntries);
+                        String[] part = txt.Split(' ', ',','?','!');
 
                         var list = new List<string>(part);
                         var q = list.GroupBy(b => b)
@@ -110,8 +109,20 @@ namespace U18SEP10X1
                         break;
 
                     case "f":
+                        int k = 0;
+                        do
+                        {
+                            System.Console.WriteLine("Skriv in ett ord, skriv in 'avsluta' för att avsluta ");
+                            String input = Console.ReadLine();
+                            String close = ("avsluta");
+                            int c = string.Compare(input, close);
+                            System.Console.WriteLine("Du skrev "+ input);
+                            if (c == 0) { k = 1; }
 
-
+                            
+                            
+                        }
+                        while (k != 1);
 
                         active = 1;
                         break;
